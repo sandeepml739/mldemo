@@ -9,6 +9,10 @@ import mlflow.sklearn
 
 # COMMAND ----------
 
+!/databricks/python3/bin/python -m pip install --upgrade pip
+
+# COMMAND ----------
+
 data  = load_iris()
 
 # COMMAND ----------
@@ -48,7 +52,7 @@ with mlflow.start_run():
     mlflow.log_param("random_state",10)
     mlflow.log_metric("accuracy",accuracy)
     mlflow.sklearn.log_model(dtc,"model")
-    modelpath = "/dbfs/mlflow/iris/model-%s-%f" %("decision_tree",1)
+    modelpath = "/dbfs/mlflow/iris2/model-%s-%f" %("decision_tree",1)
     mlflow.sklearn.save_model(dtc,modelpath)
     
     
@@ -66,7 +70,7 @@ with mlflow.start_run():
     mlflow.log_param("max_depth",1)
     mlflow.log_metric("accuracy",accuracy)
     mlflow.sklearn.log_model(dtc,"model")
-    modelpath = "/dbfs/mlflow/iris/model-%s-%f" %("decision_tree",2)
+    modelpath = "/dbfs/mlflow/iris2/model-%s-%f" %("decision_tree",2)
     mlflow.sklearn.save_model(dtc,modelpath)
     
     
@@ -85,7 +89,7 @@ with mlflow.start_run():
     mlflow.log_param("min_samples_split",5)
     mlflow.log_metric("accuracy",accuracy)
     mlflow.sklearn.log_model(dtc,"model")
-    modelpath = "/dbfs/mlflow/iris/model-%s-%f" %("decision_tree",3)
+    modelpath = "/dbfs/mlflow/iris2/model-%s-%f" %("decision_tree",3)
     mlflow.sklearn.save_model(dtc,modelpath)
     
     
@@ -102,7 +106,7 @@ with mlflow.start_run():
     mlflow.log_param("n_neighbors",5)
     mlflow.log_metric("accuracy",accuracy)
     mlflow.sklearn.log_model(knn,"model")
-    modelpath = "/dbfs/mlflow/iris/model-%s-%f" %("KNN",4)
+    modelpath = "/dbfs/mlflow/iris2/model-%s-%f" %("KNN",4)
     mlflow.sklearn.save_model(knn,modelpath)
     
     
@@ -119,7 +123,7 @@ with mlflow.start_run():
     mlflow.log_param("n_neighbors",2)
     mlflow.log_metric("accuracy",accuracy)
     mlflow.sklearn.log_model(knn,"model")
-    modelpath = "/dbfs/mlflow/iris/model-%s-%f" %("KNN",5)
+    modelpath = "/dbfs/mlflow/iris2/model-%s-%f" %("KNN",5)
     mlflow.sklearn.save_model(knn,modelpath)
     
     
@@ -130,12 +134,16 @@ mlflow.search_runs()
 
 # COMMAND ----------
 
-run_idl = "8455d71cb1154183ac6d3b577678c55f"
+run_idl = "5bcc9e7531044f6ead9ef5b15b7b493e"
 model_url = "runs:/" + run_idl + "/model"
 
 # COMMAND ----------
 
 model = mlflow.sklearn.load_model(model_uri = model_url)
+
+# COMMAND ----------
+
+model
 
 # COMMAND ----------
 
